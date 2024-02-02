@@ -14,7 +14,10 @@ void setup() {
 }
 
 void loop() {
-  if (!rfid.PICC_IsNewCardPresent() || !rfid.PICC_ReadCardSerial()) return;
+  if (!rfid.PICC_IsNewCardPresent() || !rfid.PICC_ReadCardSerial()) {
+//    Serial.println("break1");
+    return;
+  }
   // Serial.print("PICC type: ");
 
   MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
@@ -22,7 +25,7 @@ void loop() {
       piccType != MFRC522:: PICC_TYPE_MIFARE_1K   &&
       piccType != MFRC522:: PICC_TYPE_MIFARE_4K)
   {
-    Serial.println("Your tag is not of type MIFARE Classic."); return;
+    Serial.println("Your {tag is not of type MIFARE Classic."); return;
   }
 
   String strID = "";
